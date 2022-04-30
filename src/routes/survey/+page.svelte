@@ -6,6 +6,7 @@
 		Modal,
 		ProgressBar,
 		ProgressIndicator,
+		ButtonSet,
 		ProgressStep,
 		RadioButtonGroup,
 		RadioButton,
@@ -19,6 +20,16 @@
 	const plans = ['Free (1 GB)', 'Standard (10 GB)', 'Pro (128 GB)'];
 
 	let plan = plans[1];
+
+	let max = 328;
+	let value = 0;
+	let status = 'active';
+
+	$: helperText = value > 0 ? value.toFixed(0) + 'MB of ' + max + 'MB' : 'Press start';
+	$: if (value === max) {
+		helperText = 'Done';
+		status = 'finished';
+	}
 </script>
 
 <div style="margin-bottom: 20px;"><Checkbox labelText="Label text" /></div>
@@ -81,6 +92,54 @@
 
 <div style="margin-bottom: 30px;">
 	<ProgressBar value={40} labelText="Upload status" helperText="40 MB of 100 MB" />
+</div>
+
+<div style="margin-bottom: 30px;">
+	<ProgressBar helperText="Loading..." />
+</div>
+
+<div style="margin-bottom: 30px;">
+	<ProgressBar
+		kind="indented"
+		status="finished"
+		value={40}
+		labelText="Upload file"
+		helperText="Upload complete"
+	/>
+</div>
+
+<div style="margin-bottom: 30px;">
+	<ProgressBar labelText="Upload status" {value} {max} {helperText} {status} />
+
+	<ButtonSet style="margin-top: var(--cds-spacing-08)">
+		<Button
+			disabled={value > 0}
+			on:click={() => {
+				const interval = setInterval(() => {
+					const delta = Math.random() * 10;
+
+					if (value + delta < max) {
+						value += delta;
+					} else {
+						value = max;
+						clearInterval(interval);
+					}
+				}, 30);
+			}}
+		>
+			Start
+		</Button>
+		<Button
+			kind="tertiary"
+			disabled={value !== max}
+			on:click={() => {
+				value = 0;
+				status = 'active';
+			}}
+		>
+			Reset
+		</Button>
+	</ButtonSet>
 </div>
 
 <div style="margin-bottom: 20px;">

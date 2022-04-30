@@ -1,6 +1,17 @@
 <script>
-	import { PaginationNav, DataTable, Tabs, Tab, TabContent, Tile } from 'carbon-components-svelte';
+	import {
+		PaginationNav,
+		DataTable,
+		Tabs,
+		Tab,
+		TabContent,
+		Tile,
+		Pagination,
+		Search
+	} from 'carbon-components-svelte';
 </script>
+
+<Search placeholder="Search catalog..." value="Cloud functions" />
 
 <Tile>
 	<section class="lineup-section">
@@ -152,3 +163,4 @@
 </Tabs>
 
 <PaginationNav />
+<Pagination totalItems={102} pageSizes={[10, 15, 20]} />
