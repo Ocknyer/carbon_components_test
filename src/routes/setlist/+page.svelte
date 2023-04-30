@@ -15,10 +15,10 @@
 
 <Tile>
 	<section class="lineup-section">
-		<h1>lineup</h1>
+		<!-- <h1>lineup</h1>
 		<p>PSAT (Pure Sound Audio Team)</p>
 		<p>백색왜성</p>
-		<p>밴드 파수꾼</p>
+		<p>밴드 파수꾼</p> -->
 	</section>
 </Tile>
 
